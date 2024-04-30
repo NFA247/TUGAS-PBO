@@ -1,0 +1,39 @@
+abstract class Manusia {
+    protected double tinggiBadan;
+
+    public Manusia(double tinggiBadan) {
+        this.tinggiBadan = tinggiBadan;
+    }
+
+    public abstract double hitungBeratBadanIdeal();
+}
+
+class Pria extends Manusia {
+    public Pria(double tinggiBadan) {
+        super(tinggiBadan);
+    }
+
+    public double hitungBeratBadanIdeal() {
+        return (tinggiBadan - 100) * 0.9;
+    }
+}
+
+class Wanita extends Manusia {
+    public Wanita(double tinggiBadan) {
+        super(tinggiBadan);
+    }
+
+    public double hitungBeratBadanIdeal() {
+        return (tinggiBadan - 110) * 0.9;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Pria pria = new Pria(182);
+        Wanita wanita = new Wanita(165);
+
+        System.out.println("Berat badan ideal pria: " + pria.hitungBeratBadanIdeal());
+        System.out.println("Berat badan ideal wanita: " + wanita.hitungBeratBadanIdeal());
+    }
+}
