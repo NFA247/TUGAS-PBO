@@ -1,0 +1,62 @@
+class Person {
+    void showIdealWeight() { System.out.println("Person ideal weight"); }
+    void showHeight() { System.out.println("Person height"); }
+    void printMessage() { System.out.println("Person Message" + CalculateIdealWeight() + "kg"); }
+    double CalculateIdealWeight() { return 0; }
+}
+
+class Man extends Person {
+    @Override
+    void showIdealWeight() { System.out.println("Man ideal weight"); }
+    @Override
+    void showHeight() { System.out.println("Man height"); }
+    @Override
+    void printMessage() { System.out.println("Man Message" + CalculateIdealWeight() + "kg"); }
+    @Override
+    double CalculateIdealWeight() { return 75; }
+}
+
+class Woman extends Person {
+    @Override
+    void showIdealWeight() { System.out.println("Woman ideal weight"); }
+    @Override
+    void showHeight() { System.out.println("Woman height"); }
+    @Override
+    void printMessage() { System.out.println("Woman Message" + CalculateIdealWeight() + "kg"); }
+    @Override
+    double CalculateIdealWeight() { return 53; }
+}
+
+class Child extends Person {
+    @Override
+    void showIdealWeight() { System.out.println("Child ideal weight"); }
+    @Override
+    void showHeight() { System.out.println("Child height"); }
+    @Override
+    void printMessage() { System.out.println("Child Message" + CalculateIdealWeight() + "kg"); }
+    @Override
+    double CalculateIdealWeight() { return 30; }
+}
+
+class Teenager extends Person {
+    @Override
+    void showIdealWeight() { System.out.println("Teenager ideal weight"); }
+    @Override
+    void showHeight() { System.out.println("Teenager height"); }
+    @Override
+    void printMessage() { System.out.println("Teenager message" + CalculateIdealWeight() + "kg"); }
+    @Override
+    double CalculateIdealWeight() { return 40; }
+}
+
+
+public class IdealWeightDemo {
+    public static void main(String[] args) {
+        Person[] people = { new Man(), new Woman(), new Child(), new Teenager() };
+        for (Person person : people) {
+            person.showIdealWeight();
+            person.showHeight();
+            person.printMessage() ;
+        }
+    }
+}
