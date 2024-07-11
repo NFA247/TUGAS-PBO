@@ -1,0 +1,185 @@
+package transpose;
+
+class Print2dArray {
+    public static void print2dArray(int[][] matrix){
+        for (int[] ints : matrix){
+            for (int c = 0; c < matrix[0].length; c++) {
+                System.out.print(ints[c] + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
+
+package transpose;
+
+class Sum{
+    public static int[][] sum(int[][] first, int[][] second){
+        int row = first.length, column = first[0].length;
+        int[][] sum = new int[row][column];
+
+        System.out.println("\nSum of Matrices:\n");
+        for (int r = 0; r < row; r++)
+            for (int c = 0; c< column; c++)
+                sum[r][c] = first[r][c] + second [r][c];
+
+        Print2dArray.print2dArray(sum);
+        return sum;
+
+    }
+        }
+
+package transpose;
+
+public class Transpose {
+    public static int[][] transpose(int[][] data) {
+        int row = data.length;
+        int column = data[0].length;
+
+        System.out.println("Elements of transpose matrix T are: ");
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < column; c++) {
+                System.out.print(data[c][r] + "\t");
+            }
+            System.out.println();
+        }
+        return data;
+    }
+}
+
+package transpose;
+
+import java.util.Scanner;
+
+public class Matrix {
+    public static void main(String[] args) {
+        System.out.println("Please enter the rows in the matrix");
+        Scanner sc = new Scanner(System.in);
+        int row = sc.nextInt();
+        System.out.println("Please enter the columns in the matrix");
+        int column = sc.nextInt();
+
+        int[][] first = new int[row][column];
+        int[][] second = new int[row][column];
+
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < column; c++) {
+                System.out.println(String.format("Enter first[%d][%d] integer", r, c));
+                first[r][c] = sc.nextInt();
+            }
+        }
+
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < column; c++) {
+                System.out.println(String.format("Enter second[%d][%d] integer", r, c));
+                second[r][c] = sc.nextInt();
+            }
+        }
+
+        // close the scanner
+        sc.close();
+
+        // print both matrices
+        System.out.println("First Matrix:\n");
+        Print2dArray.print2dArray(first);
+
+        System.out.println("Second Matrix:\n");
+        Print2dArray.print2dArray(second);
+
+        // Sum of matrices
+        int[][] sumResult = Sum.sum(first, second);
+
+        // Difference of matrices
+        int[][] differenceResult = Subtract.subtract(first, second);
+
+        // Product of matrices
+        int[][] productResult = Multiply.multiply(first, second);
+
+        // Division of matrices
+        int[][] divisionResult = Divide.divide(first, second);
+
+        // Transpose of sum matrix
+        int[][] transposedSum = Transpose.transpose(sumResult);
+
+        // Rotate the transposed sum back to normal
+        Rotate.rotate(transposedSum);
+    }
+}
+
+
+package transpose;
+
+public class Subtract {
+    public static int[][] subtract(int[][] first, int[][] second) {
+        int row = first.length;
+        int column = first[0].length;
+        int[][] difference = new int[row][column];
+
+        System.out.println("\nDifference of Matrices:\n");
+        for (int r = 0; r < row; r++)
+            for (int c = 0; c < column; c++)
+                difference[r][c] = first[r][c] - second[r][c];
+
+        Print2dArray.print2dArray(difference);
+        return difference;
+    }
+}
+
+package transpose;
+
+public class Multiply {
+    public static int[][] multiply(int[][] first, int[][] second) {
+        int row1 = first.length;
+        int column1 = first[0].length;
+        int column2 = second[0].length;
+
+        int [][] product = new int [row1][column2];
+
+        System.out.println("\nProducts of Matrices:\n");
+        for (int r = 0; r < row1; r++)
+            for (int c = 0; c < column2; c++)
+                for (int k = 0; k<column1; k++)
+                product[r][c] += first[r][c] * second[k][c];
+
+        Print2dArray.print2dArray(product);
+        return product;
+    }
+}
+
+
+package transpose;
+
+public class Divide {
+    public static int[][] divide(int[][] first, int[][] second) {
+        int row = first.length;
+        int column = first[0].length;
+        int[][] quotient = new int[row][column];
+
+        System.out.println("\nDivision of Matrices:\n");
+        for (int r = 0; r < row; r++)
+            for (int c = 0; c < column; c++)
+                quotient[r][c] = first[r][c] / second[r][c];
+
+        Print2dArray.print2dArray(quotient);
+        return quotient;
+    }
+}
+
+
+package transpose;
+
+public class Rotate {
+    public static int[][] rotate(int[][] data) {
+        int row = data.length;
+        int column = data[0].length;
+        int[][] rotated = new int[column][row];
+
+        for (int r = 0; r < row; r++)
+            for (int c = 0; c < column; c++)
+                rotated[c][r] = data[r][c];
+
+        System.out.println("\nRotated Matrix:\n");
+        Print2dArray.print2dArray(rotated);
+        return rotated;
+    }
+}
