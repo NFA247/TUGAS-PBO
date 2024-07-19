@@ -1,0 +1,187 @@
+package sortCollection;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        SelectionSort ob = new SelectionSort();
+        PrintArray pa = new PrintArray();
+        InsertionSort is = new InsertionSort();
+        FindTheLargest fl = new FindTheLargest();
+        FindTheSmallest fs = new FindTheSmallest();
+        RemoveOddNumbers ro = new RemoveOddNumbers();
+        Scanner sc = new Scanner(System.in);
+
+        // Mengambil ukuran array dari pengguna
+        System.out.println("Enter the size of the array: ");
+        int arr_size = 0;
+        if (sc.hasNextInt()) {
+            arr_size = sc.nextInt();
+        }
+
+        // Menginisialisasi ukuran array menggunakan input pengguna
+        int[] arr = new int[arr_size];
+
+        // Mengambil elemen array dari pengguna
+        System.out.println("Enter the elements of the array: ");
+        for (int i = 0; i < arr_size; i++) {
+            if (sc.hasNextInt()) {
+                arr[i] = sc.nextInt();
+            }
+        }
+
+        System.out.println("Given array");
+        pa.PrintArray(arr);
+
+        // Menemukan angka terbesar dalam array
+        System.out.println("The Largest Number in array");
+        pa.PrintArray(fl.findlargest(arr));
+
+        // Menemukan angka terkecil dalam array
+        System.out.println("The Smallest Number in array");
+        pa.PrintArray(fs.findSmallest(arr));
+
+        // Menghapus angka ganjil dalam array
+        System.out.println("Array after removing odd numbers");
+        pa.PrintArray(ro.removeOdds(arr));
+
+        // Menyortir array menggunakan Insertion Sort
+        System.out.println("Insertion Sorted array");
+        pa.PrintArray(is.insort(arr));
+
+        // Menyortir array menggunakan Selection Sort
+        System.out.println("Selection Sorted array");
+        pa.PrintArray(ob.selsort(arr));
+    }
+}
+
+package sortCollection;
+
+class PrintArray{
+    void PrintArray(int arr[]){
+        int n = arr.length;
+        for(int i = 0; i < n; ++i)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+}
+
+
+package sortCollection;
+
+public class FindTheLargest {
+    int[] findlargest(int[] arr){
+        int i;
+
+        // Initialize maximum element
+        int max = arr[0];
+
+        // Traverse array elements from second and
+        // compare every element with current max
+        for (i = 1; i < arr.length; i++)
+            if (arr[i] > max)
+                max = arr[i];
+
+        return new int[]{max};
+    }
+}
+
+package sortCollection;
+
+class InsertionSort {
+    int[] insort(int[] arr) {
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+
+            // Move elements of arr[0..i-1], that are
+            // greater than key, to one position ahead
+            // of their current position
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+        return arr;
+    }
+}
+
+package sortCollection;
+
+class SelectionSort {
+    int[] selsort(int[] arr)
+    {
+        int n = arr.length;
+
+        // One by one move boundary of unsorted subarray
+        for (int i = 0; i < n - 1; i++) {
+            // Find the minimum element in unsorted array
+            int min_idx = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[min_idx])
+                    min_idx = j;
+            }
+
+            // Swap the found minimum element with the first
+            // element
+            int temp = arr[min_idx];
+            arr[min_idx] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
+    }
+}
+
+package sortCollection;
+
+public class FindTheSmallest {
+    int[] findSmallest(int[] arr){
+        int i;
+
+        // Initialize minimum element
+        int min = arr[0];
+
+        // Traverse array elements from second and
+        // compare every element with current max
+        for (i = 1; i < arr.length; i++)
+            if (arr[i] < min)
+                min = arr[i];
+
+        return new int[]{min};
+    }
+}package sortCollection;
+
+import java.util.ArrayList;
+
+public class RemoveOddNumbers {
+    int[] removeOdds(int[] arr) {
+        ArrayList<Integer> evenNumbers = new ArrayList<>();
+        ArrayList<Integer> removedNumbers = new ArrayList<>();
+
+        for (int num : arr) {
+            if (num % 2 == 0) {
+                evenNumbers.add(num);
+            } else {
+                removedNumbers.add(num);
+            }
+        }
+
+        // Print numbers that were removed
+        System.out.println("Removed odd numbers: ");
+        for (int num : removedNumbers) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        // Convert ArrayList back to array
+        int[] result = new int[evenNumbers.size()];
+        for (int i = 0; i < evenNumbers.size(); i++) {
+            result[i] = evenNumbers.get(i);
+        }
+
+        return result;
+    }
+}
+
